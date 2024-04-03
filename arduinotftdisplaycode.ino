@@ -1,141 +1,244 @@
-/* an alternative approach.   swap the #if 1 / 0 values to try it
- * how to map for different rotations.
- */
-#if 0
-
 #include <Adafruit_GFX.h>
 #include <MCUFRIEND_kbv.h>
-MCUFRIEND_kbv tft;
 #include <TouchScreen.h>
-#define MINPRESSURE 200
+#include<SoftwareSerial.h>
+MCUFRIEND_kbv tft;
+//defining LCD pins used
+#define LCD_CS A3
+#define LCD_CD A2
+#define LCD_WR A1
+#define LCD_RD A0
+#define LCD_RESET A4
+//define screen constansts
+#define REDBAR_MINX 80
+#define GREENBAR_MINX 130
+#define BLUEBAR_MINX 180
+#define BAR_MINY 30
+#define BAR_HEIGHT 250
+#define BAR_WIDTH 30
+//touch screen working constants
+#define MINPRESSURE 10
 #define MAXPRESSURE 1000
+#define TS_MINX 125
+#define TS_MINY 85
+#define TS_MAXX 965
+#define TS_MAXY 905
+//assigning message variable
+const char *msg ;
+SoftwareSerial s(1,0);
 
-#define ORIENTATION 1   //change screen rotation
 
-// ALL Touch panels and wiring is DIFFERENT
-// copy-paste results from TouchScreen_Calibr_native.ino
-const int XP = 6, XM = A2, YP = A1, YM = 7; //ID=0x9341
-const int TS_LEFT = 907, TS_RT = 136, TS_TOP = 942, TS_BOT = 139;
-
+//Touch screen control pins
+#define XP 8   //X-Plus
+#define XM A2  //X-Minus
+#define YP A3  //Y-Plus
+#define YM 9   //Y-Minus
+//declaring touchscreen variable and Initialising
 TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
+//defining colors
+#define BLACK    0x0000
+#define BLUE     0x001F
+#define DARKBLUE 0x0010
+#define VIOLET   0x8888
+#define RED      0xF800
+#define GREEN    0x07E0
+#define CYAN     0x07FF
+#define MAGENTA  0xF81F
+#define YELLOW   0xFFE0
+#define WHITE    0xFFFF
+#define GREY   tft.color565(64, 64, 64);
+#define GOLD     0xFEA0
+#define BROWN    0xA145
+#define SILVER   0xC618
+#define LIME     0x07E0
 
-// forward declarations 
-extern bool update_button(Adafruit_GFX_Button *b, bool down);
-extern bool update_button_list(Adafruit_GFX_Button **pb);
 
-Adafruit_GFX_Button on_btn, off_btn;
-
-int pixel_x, pixel_y;     //Touch_getXY() updates global vars
-bool Touch_getXY(void)
+//Menu Home Screen
+void drawHome()
 {
-    TSPoint p = ts.getPoint();
-    pinMode(YP, OUTPUT);      //restore shared pins
-    pinMode(XM, OUTPUT);      //because TFT control pins
-    bool pressed = (p.z > MINPRESSURE && p.z < MAXPRESSURE);
-    if (pressed) {
-        switch (tft.getRotation() & 3) {
-            // map raw ADC values to pixel coordinates
-            // most apps only use a fixed rotation e.g omit unused rotations
-            case 0:      //PORTRAIT
-                pixel_x = map(p.x, TS_LEFT, TS_RT, 0, tft.width());
-                pixel_y = map(p.y, TS_TOP, TS_BOT, 0, tft.height());
-                break;
-            case 1:      //LANDSCAPE
-                pixel_x = map(p.y, TS_TOP, TS_BOT, 0, tft.width());
-                pixel_y = map(p.x, TS_RT, TS_LEFT, 0, tft.height());
-                break;
-            case 2:      //PORTRAIT REV
-                pixel_x = map(p.x, TS_RT, TS_LEFT, 0, tft.width());
-                pixel_y = map(p.y, TS_BOT, TS_TOP, 0, tft.height());
-                break;
-            case 3:      //LANDSCAPE REV
-                pixel_x = map(p.y, TS_BOT, TS_TOP, 0, tft.width());
-                pixel_y = map(p.x, TS_LEFT, TS_RT, 0, tft.height());
-                break;
-        }
-    }
-    return pressed;
+  //White background
+  tft.fillScreen(WHITE);
+  //Dish1* Box ===RICE
+  tft.drawRoundRect(10, 30, 100, 80, 10, WHITE);
+  tft.fillRoundRect(10, 30, 100, 80, 10, GOLD );
+    //Dish2* BOX ===PANNER
+  tft.drawRoundRect(130, 30, 100, 80, 10, WHITE);  
+  tft.fillRoundRect(130, 30, 100, 80, 10, GOLD);
+   //Dish3* Box
+  tft.drawRoundRect(10, 120, 100, 80, 10, WHITE);
+  tft.fillRoundRect(10, 120, 100, 80, 10, GOLD);
+  //Dish4* Box
+  tft.drawRoundRect(130, 120, 100, 80, 10, WHITE);  
+  tft.fillRoundRect(130, 120, 100, 80, 10, GOLD);
+  // //Call Waiter Box
+  tft.drawRoundRect(10, 215, 220, 40, 10, WHITE);  
+  tft.fillRoundRect(10, 215, 220, 40, 10, MAGENTA);
+  //Water Box
+  tft.drawRoundRect(10, 270, 220, 40, 10, WHITE);  
+  tft.fillRoundRect(10, 270, 220, 40, 10, BLUE);
+  //Menu Heading
+  tft.setCursor(50, 0);
+  tft.setTextSize(3);
+  tft.setTextColor(LIME);
+  tft.print("TABLE 07");
+  ///
+  tft.setTextSize(2);
+  tft.setTextColor(WHITE);
+   //writing in dish1 box
+  tft.setCursor(15, 60);
+  tft.print(" RICE");
+  //writing in dish2 box
+  tft.setCursor(135, 60);
+  tft.print(" PANNER");
+  //writing in dish3 box
+  tft.setCursor(20, 150);
+  tft.print(" ROTI");
+  //writing in dish6 box
+  tft.setCursor(135, 150);
+  tft.print(" RAJMA");
+  //writing in bill box
+  tft.setCursor(50, 225);
+  tft.print(" Call Waiter");
+  //writing water in water box
+  tft.setCursor(95, 280);
+  tft.print("Water");
+  delay(500);
 }
 
-#define BLACK   0x0000
-#define BLUE    0x001F
-#define RED     0xF800
-#define GREEN   0x07E0
-#define CYAN    0x07FF
-#define MAGENTA 0xF81F
-#define YELLOW  0xFFE0
-#define WHITE   0xFFFF
 
+void Loading_Delay(){
+   // Delay Box
+  for (int i; i < 250; i++)
+  {
+    tft.fillRect(BAR_MINY - 10, BLUEBAR_MINX, i, 10, GREEN );
+    delay(0.000000000000000000000000000000000000000000000001);
+  }
+}
 void setup(void)
 {
-#if defined(__arm__) || defined(ESP32) //default to 12-bit ADC
-    analogReadResolution(10); //Adafruit TouchScreen.h expects 10-bit
-#endif
-    Serial.begin(9600);
-    uint16_t ID = tft.readID();
-    Serial.print("TFT ID = 0x");
-    Serial.println(ID, HEX);
-    Serial.println("Calibrate for your Touch Panel");
-    if (ID == 0xD3D3) ID = 0x9486; // write-only shield
-    tft.begin(ID);
-    tft.setRotation(ORIENTATION);   // try different rotations
-    tft.fillScreen(BLACK);
-    on_btn.initButton(&tft,  60, 200, 100, 40, WHITE, CYAN, BLACK, "ON", 2);
-    off_btn.initButton(&tft, 180, 200, 100, 40, WHITE, CYAN, BLACK, "OFF", 2);
-    on_btn.drawButton(false);
-    off_btn.drawButton(false);
-    tft.fillRect(40, 80, 160, 80, RED);
+  Serial.begin(9600);
+  tft.begin(0x9486);  
+  tft.fillScreen(BLACK);
+  tft.setRotation(0);
+  tft.setTextSize(3);
+  tft.setTextColor(WHITE);
+  tft.setCursor(50, 140);
+  tft.print("Loading...");
+  tft.setTextColor(tft.color565(255, 255, 0));
+  tft.setCursor(30, 70);
+  tft.print("iRestaurant");
+  tft.setCursor(15, 100);
+  tft.print(" SMART MENU ");
+  Loading_Delay();
+  delay(500);
+
+
+  // Loading Part.
+  Serial.println(tft.readID(), HEX);
+  tft.fillScreen(BLACK);
+  tft.setTextSize(3);
+  tft.setTextColor(WHITE);
+  tft.setCursor(50, 140);
+  tft.print("Loading...");
+
+
+  // Calling function.
+  Loading_Delay();
+  delay(500);
+
+
+  // Then become full sreen black.
+  tft.fillScreen(BLACK);
+  drawHome();
+  Serial.println("Table 07");
 }
-
-/*  
- * updating multiple buttons from a list
- * 
- * anything more than two buttons gets repetitive
- * 
- * you can place button addresses in separate lists
- * e.g. for separate menu screens
- */
-
-// Array of button addresses to behave like a list
-Adafruit_GFX_Button *buttons[] = {&on_btn, &off_btn, NULL};
-
-/* update the state of a button and redraw as reqd
- *
- * main program can use isPressed(), justPressed() etc
- */
-bool update_button(Adafruit_GFX_Button *b, bool down)
+//working main loop
+void loop()
 {
-    b->press(down && b->contains(pixel_x, pixel_y));
-    if (b->justReleased())
-        b->drawButton(false);
-    if (b->justPressed())
-        b->drawButton(true);
-    return down;
-}
-
-/* most screens have different sets of buttons
- * life is easier if you process whole list in one go
- */
-bool update_button_list(Adafruit_GFX_Button **pb)
-{
-    bool down = Touch_getXY();
-    for (int i = 0 ; pb[i] != NULL; i++) {
-        update_button(pb[i], down);
+ TSPoint p = ts.getPoint();
+  //the directions of the touchscreen pins
+  pinMode(XP, OUTPUT);
+  pinMode(XM, OUTPUT);
+  pinMode(YP, OUTPUT);
+  pinMode(YM, OUTPUT);
+  if (p.z > ts.pressureThreshhold)
+    {
+      p.x = map(p.x, TS_MAXX, TS_MINX, 0, 240);
+      p.y = map(p.y, TS_MAXY, TS_MINY, 0, 320); 
+       if (p.x > 35 && p.x < 104 && p.y > 40 && p.y < 115 )
+      {
+        Serial.println("RICE Ordered");
+        s.write("Dish1 Ordered");
+        tft.fillRoundRect(10, 30, 100, 80, 10, WHITE);
+        delay(70);
+        tft.drawRoundRect(10, 30, 100, 80, 10, WHITE);
+        tft.fillRoundRect(10, 30, 100, 80, 10, GOLD );
+        tft.setCursor(15, 60);
+        tft.print(" RICE");
+        delay(70);
+        }
+         if (p.x > 158 && p.x < 224 && p.y > 45 && p.y < 110)
+      {
+        Serial.println("PANNER Ordered");
+        s.write("PANNER Ordered");
+        tft.fillRoundRect(130, 30, 100, 80, 10, WHITE);
+        delay(70);
+        tft.drawRoundRect(130, 30, 100, 80, 10, WHITE);  
+        tft.fillRoundRect(130, 30, 100, 80, 10, GOLD);
+        tft.setCursor(135, 60);
+         tft.print(" PANNER");
+        delay(70);
+      }
+      
+      if (p.x > 32 && p.x < 108 && p.y > 134 && p.y < 192)
+      {
+        Serial.println("ROTI");
+        s.write("ROTI Ordered");
+        tft.fillRoundRect(10, 120, 100, 80, 10, WHITE);   //rgb led
+        delay(70);
+        tft.drawRoundRect(10, 120, 100, 80, 10, WHITE);
+        tft.fillRoundRect(10, 120, 100, 80, 10, GOLD);  
+        tft.setCursor(20, 150);
+        tft.print(" ROTI");
+        delay(70);  
+      }
+      
+     
+      if (p.x > 155 && p.x < 226 && p.y > 134 && p.y < 190)
+      {
+        Serial.println("RAJMA Ordered");
+        s.write("RAJMA Ordered");
+        tft.fillRoundRect(130, 120, 100, 80, 10, WHITE);
+        delay(70);
+        tft.drawRoundRect(130, 120, 100, 80, 10, WHITE);  
+        tft.fillRoundRect(130, 120, 100, 80, 10, GOLD);
+        tft.setCursor(135, 150);
+        tft.print(" RAJMA");
+        delay(70);
+      }
+      if (p.x > 38 && p.x < 217 && p.y > 237 && p.y < 252)
+      {
+        Serial.println("Call Waiter");
+         s.write("Call Waiter");
+        tft.fillRoundRect(10, 215, 220, 40, 8, WHITE);
+        delay(70);
+        tft.drawRoundRect(10, 215, 220, 40, 8, WHITE);  
+        tft.fillRoundRect(10, 215, 220, 40, 8, MAGENTA);
+        tft.setCursor(50, 225);
+        tft.print(" Call Waiter");
+        delay(70);
+      }
+      if (p.x > 36 && p.x < 209 && p.y > 280 && p.y < 308)
+      {
+        Serial.println("Water");
+        s.write("Water");
+        tft.fillRoundRect(10, 280, 220, 40, 8, WHITE);
+        delay(70);
+        tft.drawRoundRect(10, 270, 220, 40, 8, WHITE);  
+        tft.fillRoundRect(10, 270, 220, 40, 8, BLUE);
+        tft.setCursor(95, 280);
+        tft.print("Water");
+        delay(70);
+      }
     }
-    return down;
-}
-
-/* compare the simplicity of update_button_list()
- */
-void loop(void)
-{
-    update_button_list(buttons);  //use helper function
-    if (on_btn.justPressed()) {
-        tft.fillRect(40, 80, 160, 80, GREEN);
-    }
-    if (off_btn.justPressed()) {
-        tft.fillRect(40, 80, 160, 80, RED);
-    }
-}
-#endif
-
+}  
