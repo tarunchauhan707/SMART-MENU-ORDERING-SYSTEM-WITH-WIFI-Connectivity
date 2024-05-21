@@ -50,6 +50,7 @@ pen and paper system.
 3. To use traditional system is simple; but it involves errors
 while noting down the orders as well as in making calcu-
 lations.
+
 ***
 
 ### WORKING AND METHODOLOGY
@@ -84,6 +85,8 @@ into two parts : Transmitter section (Customer Side)
 and Receiver Section.
 
 ##### 2.1. Transmitter Side
+   
+![TFTdisplay](https://github.com/tarunchauhan707/SMART-MENU-ORDERING-SYSTEM-WITH-WIFI-Connectivity/assets/129646051/6eee5031-8ec3-442a-92af-6118b11f0551)
 
 
 ##### 2.2. Reciever Side
@@ -95,6 +98,8 @@ time Database. Web Server: The web server will continuously
 listen to the Firebase database for updates. When a new order
 is placed, the web page will be updated to reflect the latest
 order status.
+
+![Webpage](https://github.com/tarunchauhan707/SMART-MENU-ORDERING-SYSTEM-WITH-WIFI-Connectivity/assets/129646051/79110ab6-d0f2-44bc-97dc-926986c02342)
 
 ***
 
