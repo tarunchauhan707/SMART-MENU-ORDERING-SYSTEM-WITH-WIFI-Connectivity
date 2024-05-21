@@ -37,6 +37,9 @@ We found out that this method is useful in many ways like- It not only
 saved the wastage of paper but also reduced the burden on the
 waiters and workers to great extent.
 
+![smartmenu](https://github.com/tarunchauhan707/SMART-MENU-ORDERING-SYSTEM-WITH-WIFI-Connectivity/assets/129646051/5f5dd3ed-22be-4a4d-bfa2-5b620f36ea0f)
+
+
 ***
 
 ### PROBLEM STATEMENT
