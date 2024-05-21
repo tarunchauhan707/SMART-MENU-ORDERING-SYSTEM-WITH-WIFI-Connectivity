@@ -71,8 +71,8 @@ pared at the faster rate and time will be saved and more orders
 can be taken. The prepared food will be taken directly to the
 customer from kitchen. Hence, also called as interaction cum
 service.
-**
-1.<u> Serial Communication</u>
+
+#### 1.<u> Serial Communication</u>
 Serial communication between an Arduino Uno and an
 ESP8266 allows for data exchange between the two devices.
 Setup for Communication: Connect the TX pin of the Ar-
@@ -85,7 +85,7 @@ Smart restaurant menu ordering system is basically divided
 into two parts : Transmitter section (Customer Side)
 and Receiver Section.
 **
-2.1. Transmitter Side
+#### 2.1. Transmitter Side
 
 ![smartmenu](https://github.com/tarunchauhan707/SMART-MENU-ORDERING-SYSTEM-WITH-WIFI-Connectivity/assets/129646051/5f5dd3ed-22be-4a4d-bfa2-5b620f36ea0f)
 
