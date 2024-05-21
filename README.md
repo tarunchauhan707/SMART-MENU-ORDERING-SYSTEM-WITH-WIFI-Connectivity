@@ -37,7 +37,8 @@ We found out that this method is useful in many ways like- It not only
 saved the wastage of paper but also reduced the burden on the
 waiters and workers to great extent.
 
-![smartmenu](https://github.com/tarunchauhan707/SMART-MENU-ORDERING-SYSTEM-WITH-WIFI-Connectivity/assets/129646051/5f5dd3ed-22be-4a4d-bfa2-5b620f36ea0f)
+![image](https://github.com/tarunchauhan707/SMART-MENU-ORDERING-SYSTEM-WITH-WIFI-Connectivity/assets/129646051/549ec8cc-fb8e-438b-b46c-1bec057c2f57)
+
 
 
 ***
@@ -70,6 +71,7 @@ pared at the faster rate and time will be saved and more orders
 can be taken. The prepared food will be taken directly to the
 customer from kitchen. Hence, also called as interaction cum
 service.
+**
 1.<u> Serial Communication</u>
 Serial communication between an Arduino Uno and an
 ESP8266 allows for data exchange between the two devices.
@@ -82,10 +84,12 @@ for consistent communication
 Smart restaurant menu ordering system is basically divided
 into two parts : Transmitter section (Customer Side)
 and Receiver Section.
+**
 2.1. Transmitter Side
 
-Figure 4. Serial communication between esp8266 and arduino uno
-Figure 5. Transmitter Side(customer side)
+![smartmenu](https://github.com/tarunchauhan707/SMART-MENU-ORDERING-SYSTEM-WITH-WIFI-Connectivity/assets/129646051/5f5dd3ed-22be-4a4d-bfa2-5b620f36ea0f)
+
+**
 2.2. Reciever Side
 Web Interface Development: Create a user-friendly web
 page using HTML, CSS, and Javascript. This page will display
