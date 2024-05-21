@@ -37,9 +37,7 @@ We found out that this method is useful in many ways like- It not only
 saved the wastage of paper but also reduced the burden on the
 waiters and workers to great extent.
 
-![image](https://github.com/tarunchauhan707/SMART-MENU-ORDERING-SYSTEM-WITH-WIFI-Connectivity/assets/129646051/549ec8cc-fb8e-438b-b46c-1bec057c2f57)
-
-
+![smartmenu](https://github.com/tarunchauhan707/SMART-MENU-ORDERING-SYSTEM-WITH-WIFI-Connectivity/assets/129646051/5f5dd3ed-22be-4a4d-bfa2-5b620f36ea0f)
 
 ***
 
@@ -80,17 +78,15 @@ duino to the RX pin of the ESP8266. Connect the RX pin of
 the Arduino to the TX pin of the ESP8266. Software Config-
 uration: Baud Rate: Set the same baud rate on both devices
 for consistent communication
-2.<u>Transmitter side and Reciever Side</u>
+#### 2.<u>Transmitter side and Reciever Side</u>
 Smart restaurant menu ordering system is basically divided
 into two parts : Transmitter section (Customer Side)
 and Receiver Section.
-**
-#### 2.1. Transmitter Side
 
-![smartmenu](https://github.com/tarunchauhan707/SMART-MENU-ORDERING-SYSTEM-WITH-WIFI-Connectivity/assets/129646051/5f5dd3ed-22be-4a4d-bfa2-5b620f36ea0f)
+##### 2.1. Transmitter Side
 
-**
-2.2. Reciever Side
+
+##### 2.2. Reciever Side
 Web Interface Development: Create a user-friendly web
 page using HTML, CSS, and Javascript. This page will display
 the orders at the Reciever Side.
