@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap");
+
+
+.services-section{
+    background-color: white;
+}
+
+
+.services-section-heading{
+    color: #183b56;
+    font-family: "Roboto";
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.Service-item-card{
+    border-radius: 16px;
+}
+
+
+.sevice-item-image{
+    border-radius: 20px;
+    height: 290px;
+    width: 200px;
+}
+
+
+.service-card-title{
+    color: #323f4b;
+    font-family: "Roboto";
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 24px;
+}
+
+
+
+.common{
+    font-weight: bold;
+    border-radius: 23px;
+    padding: 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.main-container{
+    background-color: antiquewhite;
+    height: 100vh;
+    padding: 12px;
+}
+
+
+
+
+.heading-style{
+    text-align: center;
+
+}
+
+
+.card-container{
+    border-style: none;
+    background-color: rgb(227, 211, 204);
+    border-radius: 12px;
+    margin: 12px;
+    padding: 12px;
+}
+
+
+.table{
+    text-align: center;
+}
+
+.order{
+    text-align: center;
+}
